@@ -47,4 +47,4 @@ jobs:
         with:
           app-name: 'financial-agent-app-vyt'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_83261E4617FF4AB3AAE36971287E0B44 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A11869BE84184C4F8DF7B3E4C2328BE0 }}
