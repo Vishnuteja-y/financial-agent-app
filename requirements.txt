@@ -7,4 +7,4 @@ azure-cosmos
 azure-core
 python-dotenv
 gunicorn
-pyodbc
+pymssql
