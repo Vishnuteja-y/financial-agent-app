@@ -1,4 +1,4 @@
-import pyodbc
+import pymssql
 from config import Config
 
 SCHEMA = """
@@ -17,26 +17,22 @@ Columns:
 
 
 def get_connection():
-    conn_str = (
-        f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-        f"SERVER={Config.SQL_SERVER};"
-        f"DATABASE={Config.SQL_DATABASE};"
-        f"UID={Config.SQL_USER};"
-        f"PWD={Config.SQL_PASSWORD};"
-        f"Encrypt=yes;"
-        f"TrustServerCertificate=no;"
+    return pymssql.connect(
+        server=Config.SQL_SERVER,
+        user=Config.SQL_USER,
+        password=Config.SQL_PASSWORD,
+        database=Config.SQL_DATABASE,
+        tds_version="7.4",
     )
-    return pyodbc.connect(conn_str)
 
 
 def run_sql_query(sql: str):
     try:
         conn = get_connection()
-        cursor = conn.cursor()
+        cursor = conn.cursor(as_dict=True)
         cursor.execute(sql)
-        columns = [col[0] for col in cursor.description]
         rows = cursor.fetchall()
         conn.close()
-        return [dict(zip(columns, row)) for row in rows]
+        return rows
     except Exception as e:
         return {"error": str(e)}
