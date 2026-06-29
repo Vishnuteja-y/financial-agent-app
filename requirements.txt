@@ -1,0 +1,10 @@
+aiohttp
+botbuilder-core
+botbuilder-integration-aiohttp
+openai
+azure-search-documents
+azure-cosmos
+azure-core
+python-dotenv
+gunicorn
+pyodbc
